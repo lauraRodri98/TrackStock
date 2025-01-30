@@ -1,0 +1,51 @@
+{
+    "products": [
+      {
+        "name": "string",
+        "id_producto": "string",
+        "description": "string",
+        "price": "number",
+        "quantity": "number",
+        "imagen": "string",
+        "size": "string",
+        "color": "string",
+        "category": "string",
+        "subCategory": "string",
+        "supplier_id": "string"
+      }
+    ],
+    "movements": [
+      {
+        "product_id": "string",
+        "type": "string",
+        "quantity": "number",
+        "date": "string",
+        "comment": "string"
+      }
+    ],
+    "categories": [
+      {
+        "_id": "string",
+        "name": "string"
+      }
+    ],
+    "subcategories": [
+      {
+        "_id": "string",
+        "name": "string",
+        "category_id": "string"
+      }
+    ],
+    "suppliers": [
+      {
+        "_id": "string",
+        "name": "string",
+        "contact": {
+          "phone": "string",
+          "email": "string",
+          "address": "string"
+        }
+      }
+    ]
+  }
+  

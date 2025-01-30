@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API-restful inventario",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lauraRodri98/Inventario-productos.git"
+  },
+  "keywords": [
+    "inventario"
+  ],
+  "author": "Laura Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lauraRodri98/Inventario-productos/issues"
+  },
+  "homepage": "https://github.com/lauraRodri98/Inventario-productos#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.3",
+    "multer": "^1.4.5-lts.1",
+    "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
