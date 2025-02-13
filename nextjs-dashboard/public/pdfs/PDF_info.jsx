@@ -1,46 +1,49 @@
 import React from 'react'
 import { Document, Page, StyleSheet, Text, View, Image } from "@react-pdf/renderer";
 
-export default function PDF_info(datosEstadisticas) {
+export default function pdfinfo() {
+  let datos = {
+    valorTotal: 1000,  // Ejemplo de valor
+    totalProductos: 50,  // Ejemplo de valor
+  };
+  
 
   const style = StyleSheet.create({
     page: {margin: 60},
     section:{
-      alignContent:end,
+      alignContent:'center',
       height:30
     },
     titulo:{
       fontSize: 20,
-      textAlign: center
+      textAlign: 'center'
     },
     lista: {
       marginHorizontal:8
     },
     negrita: {
-      fontWeight:bold
+      fontWeight:'bold'
     },
-    section: {
-    }
   })
 
 
   return (
-    <div>
-      <Document>
+    <>
+      <Document file="/pdfs/Informe-1.pdf">
         <Page size="A4">
           {/* Logo de la marca "Inventory" */}
           <View style={style.section}>
-            <Image src={"../public/icono.png"}></Image>
+            <Image src="icono.png"></Image>
           </View>
           <View>
             <Text style={style.lista}>•</Text>
             <Text style={style.negrita}>Valor total del inventario: </Text>            
-            <Text></Text>
+            <Text>{datos.valorTotal}</Text>
           </View>
           <View>
             <Text style={style.lista}>•</Text>
             <Text style={style.negrita}>Total productos Stock: </Text>         
-            <Text></Text>
+            <Text>{datos.valorTotal}</Text>
           </View>
           <View>
             <Text style={style.lista}>•</Text>
@@ -71,6 +74,6 @@ export default function PDF_info(datosEstadisticas) {
 
         </Page>
       </Document>
-    </div>
+    </>
   )
 }

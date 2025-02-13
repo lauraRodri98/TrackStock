@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import useArrayCategorias from '../component';
 import Footer from "../Footer";
+import ModalEliminar from '../proveedor/ModalEliminar';
+import api from "../../api/api";
+
 
 const page = () => {
   const { supplier, error, product, movement } = useArrayCategorias();
@@ -14,6 +17,9 @@ const page = () => {
   const [visible, setVisible] = useState(false);
   const [filtrar, setFiltrar] = useState("");
   const [proveedores, setProveedores] = useState([]);
+  const [proveedor, setProveedor] = useState([]);
+  const [isOpenModalEliminar, setIsModalEliminarOpen] = useState(false);
+  const [proveedorAEliminar, setProveedorAEliminar] = useState('')
   
   useEffect(() => {
     setVisible(true);
@@ -28,6 +34,15 @@ const page = () => {
   const nombreProducto = (id) => {
     const nombre = product.filter((p) => p._id === id).map((p) => p.name);
     return nombre;
+  };
+    
+  const openModalEliminar = (proveedor) => {
+    setProveedorAEliminar(proveedor); 
+    setIsModalEliminarOpen(true);
+  };
+
+  const closeModalEliminar = () => {
+    setIsModalEliminarOpen(false)
   };
 
   const buscar = (e) => {
@@ -48,6 +63,7 @@ const page = () => {
   };
 
   const mostrarProveedor = (id_proveedor) => {
+    setProveedor(id_proveedor)
     const proveedor = supplier.find((s) => s._id === id_proveedor);
     if (proveedor) {
       setNombre(proveedor.name);
@@ -61,6 +77,27 @@ const page = () => {
       }).flat();
     setRegistro(prod);
   };
+
+  const eliminarProveedor = async(id_proveedor) => {
+    if(!proveedorAEliminar) return;
+
+    console.log(id_proveedor);
+    try {
+      const url = `${api}/deleteprov?${id_proveedor}`;
+      const fechEliminar = await fetch(url, {method: 'DELETE'})
+
+      if(fechEliminar.status === 'success'){
+        setProveedores((pre)=> pre.filter((prove) => prove._id !== id_proveedor))
+        alert("El usuario se elimino correctamente")
+        closeModalEliminar();
+      }
+      console.error("No se pudo eliminar el usuario", fechEliminar.mensaje)
+
+    } catch (error) {
+      console.log(error)
+      throw new Error("No se ha encontrado al usuario en la API");
+    }
+  }
 
   const convertirFecha = (date) => {
     const fecha = date.split('T', 1);
@@ -92,43 +129,41 @@ const page = () => {
         <div className='flex justify-between'>
           <div className="flex flex-wrap justify-between w-full gap-5">
             {proveedorSeleccionado && registro.length > 0 && (
-              <div className="bg-white p-5 rounded-lg shadow-lg flex-auto w-3/12 mt-4">
+              <div className="bg-white p-2 rounded-lg shadow-lg flex-auto w-3/12 mt-4">
                 <h2 className="font-semibold text-3xl me-7">{nombre}</h2>
                 <h2 className="text-gray-500 text-sm me-7">Historial de pedidos</h2>
-              <div className="p-7">
-
-                <div className='flex justify-center gap-7 mb-9 '>
-                    <button className='bg-amber-500 px-5 py-3 w-64 rounded flex justify-center items-center text-white hover:bg-amber-400 transition-all duration-300 ease-out'>
-                      Editar proveedor
-                    </button>
-                    <button className='bg-red-600 px-5 py-3 w-64 rounded flex justify-center items-center text-white hover:bg-red-500 transition-all duration-300 ease-out'>
-                      Eliminar proveedor
-                    </button>
-                  </div>
+                <div className="p-5">
                   <table className='table-auto w-full'>
                     <thead className="bg-sky-900 text-white">
                       <tr className='text-center'>
-                        <th className='px-4 py-2'>Fecha</th>
-                        <th className='px-4 py-2'>Productos</th>
-                        <th className='px-4 py-2'>Unid</th>
-                        <th className='px-4 py-2'>Precio total</th>
-                        <th className='px-4 py-2'>Estado</th>
+                        <th className='px-1 py-2'>Fecha</th>
+                        <th className='px-1 py-2'>Productos</th>
+                        <th className='px-1 py-2'>Unid</th>
+                        <th className='px-1 py-2'>Precio total</th>
+                        <th className='px-1 py-2'>Estado</th>
                       </tr>
                     </thead>
                     <tbody>
                       {registro.map((m) => (
                         <tr key={m._id} >
-                          <td className='p-4 text-center border-t border-gray-300 text-sm'>{convertirFecha(m.date)}</td>
-                          <td className='p-4 text-center border-t border-gray-300 text-sm'>{nombreProducto(m.product_id)}</td>
-                          <td className='p-4 text-center border-t border-gray-300 text-sm'>{m.quantity}</td>
-                          <td className='p-4 text-center border-t border-gray-300 text-sm'>{precioTotal(m.product_id, m.quantity)}</td>
-                          <td className='p-4 text-center border-t border-gray-300 text-sm'>{m.comment}</td>
+                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{convertirFecha(m.date)}</td>
+                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{nombreProducto(m.product_id)}</td>
+                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{m.quantity}</td>
+                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{precioTotal(m.product_id, m.quantity)}</td>
+                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{m.comment}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                  
                 </div>
+                <div className='flex justify-around gap-7 mt-5  mb-3'>
+                    <button className='w-32 text-base marker: h-14 bg-amber-500 px-2 py-33 rounded flex justify-center items-center text-white hover:bg-amber-400 transition-all duration-300 ease-out'>
+                      Editar proveedor
+                    </button>
+                    <button onClick={() => openModalEliminar(proveedor)} className='bg-red-600 text-base px-2 h-14 py-2 w-32 rounded flex justify-center items-center text-white hover:bg-red-500 transition-all duration-300 ease-out'>
+                      Eliminar proveedor
+                    </button>
+                  </div>
               </div>
             )}
 
@@ -168,6 +203,7 @@ const page = () => {
           </div>
         </div>
       </main>
+      <ModalEliminar className="transition-opacity opacity-40 duration-500 ease-in-out transform" isOpen={isOpenModalEliminar} onClose={closeModalEliminar} onConfirm={() => eliminarProveedor(proveedorAEliminar)} />
         <Footer/>
     </div>
   );

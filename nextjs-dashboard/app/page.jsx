@@ -7,8 +7,10 @@ import api from "../api/api";
 import BarChart from './Barchart';
 import Doughnut from './Doughnut';
 import Line from './Line';
-import PDF_info from './PDF_info'; //Página para descargar el pdf con la info
+// import pdfinfo from '../public/pdfs/PDF_info'; //Página para descargar el pdf con la info
 import Footer from "./Footer";
+// import { PDFDownloadLink } from "@react-pdf/renderer";
+// import PDFViewer from "./PDFViewer";
 
 export default function Page() {
   const [errorF, setErrorF] = useState('');
@@ -30,7 +32,6 @@ export default function Page() {
   useEffect(() => {
     setVisible(true);
   }, []);
-
 
   const precioProductoEntrada = (ids) => {
     let totalPrecio = 0;
@@ -205,10 +206,10 @@ export default function Page() {
             </p>
             <span className="text-xl font-bold text-sky-600">{totalProductos}</span>
           </div>
-          <div className="bg-white p-5 min-w-[220px] rounded-lg shadow-lg w-44 text-center m-1 flex justify-center items-center flex-wrap">
+          {/* <div className="bg-white p-5 min-w-[220px] rounded-lg shadow-lg w-44 text-center m-1 flex justify-center items-center flex-wrap">
             <p className="uppercase font-semibold">Total entradas devoluciones</p>
             <span className="text-xl font-bold text-sky-600">{totalSalidas}</span>
-          </div>
+          </div> */}
           <div className="bg-white p-5 min-w-[220px] rounded-lg shadow-lg w-44 text-center m-1 flex justify-center items-center flex-col border-2 border-green-300">
             <p className="uppercase font-semibold flex justify-center">Salidas
               <FontAwesomeIcon className="size-4 mt-2 m-2 text-green-400" icon={faArrowDown} />
@@ -222,9 +223,14 @@ export default function Page() {
             <span className="text-xl font-bold text-red-400 ">{entradas}</span>
           </div>
           <div className="shadow-lg w-44 min-w-[220px] text-center m-1 bg-amber-500 flex items-center flex-wrap hover:bg-amber-400 active:bg-amber-600 transition-all duration-300 ease-in-out text-white p-5 rounded-lg">
-            <button onClick={() => info_pdf(datosEstadisticas)} className="flex justify-center flex-wrap items-center ">Descargar documento PDF 
+            {/* <button onClick={handleDownloadPDF}  className="flex justify-center flex-wrap items-center "> 
               <FontAwesomeIcon className="size-8 mt-1 m-2" icon={faFileArrowDown} />
-            </button>
+            </button> */}
+            {/* <PDFDownloadLink document={<pdfinfo />} fileName="/pdfs/informe.pdf">
+              {({ loading }) => (loading ? 'Cargando documento...' : 'Descargar PDF')}
+            </PDFDownloadLink>
+            <PDFViewer /> */}
+
           </div>
         </header>
 

@@ -1,7 +1,6 @@
 const { connection } =require("./database/connetion");
 const express = require("express");
 const cors = require("cors");
-const {insertData} = require("../script.bat")
 
 //Inicializar app
 console.log("API para Inventary de node arrancada <3");
@@ -45,8 +44,6 @@ app.get("/probando", (req, res) => {
         url:"sdfkjldskfjlsdfk"
     }])
 })
-
-insertData();
 
 // Crear servidor y escuchar peticiones http
 app.listen(puerto, () => {
