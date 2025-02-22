@@ -51,6 +51,7 @@ const Modal = ({ isOpen, onClose, children, categorias}) => {
         alert("El producto se ha actualizado con éxito: ");
         e.target.reset();
         onClose();
+
       } else {
         const errorResponse = await data.json();
         alert("No se ha actualizado el producto: " + (errorResponse.mensaje || "Error desconocido"));
@@ -184,19 +185,6 @@ const Modal = ({ isOpen, onClose, children, categorias}) => {
                     <input type="text" className= "mt-2 mb-4 w-20 bg-gray-100 border-gray-200 rounded h-8" name="id_producto" id="" onChange={handleChange} required />
                   </div>
                 </div> 
-               
-                {/* <label className='mb-4' htmlFor="">Color</label><br />
-                <button value="white" onClick={() => colorProducto("white")} className='transition-all duration-300 ease-out hover:bg-gray-100 bg-white border w-6 h-6 mx-2 rounded'></button>
-                <button value="yellow" onClick={() => colorProducto("yellow")} className='transition-all duration-300 ease-out hover:bg-yellow-400 bg-yellow-300 w-6 h-6 mx-2 rounded'></button>
-                <button value="orange" onClick={() => colorProducto("orange")} className='transition-all duration-300 ease-out hover:bg-orange-600 bg-orange-500 w-6 h-6 mx-2 rounded'></button>
-                <button value="red" onClick={() => colorProducto("red")} className='transition-all duration-300 ease-out hover:bg-red-700 bg-red-600 w-6 h-6 mx-2 rounded'></button>
-                <button value="pink" onClick={() => colorProducto("pink")} className='transition-all duration-300 ease-out hover:bg-pink-600 bg-pink-500 w-6 h-6 mx-2 rounded'></button>
-                <button value="violet" onClick={() => colorProducto("violet")} className='transition-all duration-300 ease-out hover:bg-fuchsia-900 bg-fuchsia-800 w-6 h-6 mx-2 rounded'></button>
-                <button value="blue" onClick={() => colorProducto("blue")} className='transition-all duration-300 ease-out hover:bg-blue-700 bg-blue-600 w-6 h-6 mx-2 rounded'></button>
-                <button value="green" onClick={() => colorProducto("green")} className='transition-all duration-300 ease-out hover:bg-green-700 bg-green-600 w-6 h-6 mx-2 rounded'></button>
-                <button value="black" onClick={() => colorProducto("black")} className='transition-all duration-300 ease-out bg-black hover:bg-gray-700 w-6 h-6 mx-2 rounded'></button><br /><br /> */}
-                {/* <label htmlFor="mb-4">Imagen</label><br />
-                <input type="file" id="imageUpload" name="image" accept="image/*" className="border p-2 mt-2 rounded-lg bg-gray-100"/> */}
                 <div className="modal-actions flex items-center justify-center mt-5">
                   <button type='submit' className='px-6 py-3 transition-all duration-200 ease-in-out text-white active:bg-amber-500 bg-amber-500 hover:bg-amber-400  rounded-md'>Nuevo</button>
                   <button onClick={onClose} className='px-5 py-3 ms-4 transition-all duration-200 ease-in-out border border-amber-500 border-1 text-amber-600 hover:text-white active:bg-amber-500 hover:bg-amber-400 rounded-md'>Cancelar</button>

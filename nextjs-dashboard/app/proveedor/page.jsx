@@ -7,6 +7,7 @@ import useArrayCategorias from '../component';
 import Footer from "../Footer";
 import ModalEliminar from '../proveedor/ModalEliminar';
 import api from "../../api/api";
+import Crear from './Crear'
 
 
 const page = () => {
@@ -20,6 +21,7 @@ const page = () => {
   const [proveedor, setProveedor] = useState([]);
   const [isOpenModalEliminar, setIsModalEliminarOpen] = useState(false);
   const [proveedorAEliminar, setProveedorAEliminar] = useState('')
+  const [isOpenModalCrear, setIsOpenModalCrear] = useState(false);
   
   useEffect(() => {
     setVisible(true);
@@ -44,6 +46,14 @@ const page = () => {
   const closeModalEliminar = () => {
     setIsModalEliminarOpen(false)
   };
+
+  const openModalCrear = () => {
+    setIsOpenModalCrear(true);
+  }
+
+  const closeModalCrear = () => {
+    setIsOpenModalCrear(false);
+  }
 
   const buscar = (e) => {
     const palabra = e.target.value;
@@ -116,7 +126,7 @@ const page = () => {
 
       <main className={`flex-1 ml-64 text-xl pb-6 h-screen text-end transition-all duration-500 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} >
         <div className='flex gap-4 items-center justify-between flex-wrap mb-5 bg-white p-4 shadow-lg shadow-gray-300 rounded-lg'>
-          <button className='bg-amber-500 px-5 py-3 rounded flex text-white hover:bg-amber-400 transition-all duration-300 ease-out'>
+          <button onClick={openModalCrear} className='bg-amber-500 px-5 py-3 rounded flex text-white hover:bg-amber-400 transition-all duration-300 ease-out'>
             NUEVO 
             <FontAwesomeIcon className='size-4 mt-1 ms-2' icon={faPlus} />
           </button>
@@ -146,11 +156,11 @@ const page = () => {
                     <tbody>
                       {registro.map((m) => (
                         <tr key={m._id} >
-                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{convertirFecha(m.date)}</td>
-                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{nombreProducto(m.product_id)}</td>
-                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{m.quantity}</td>
-                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{precioTotal(m.product_id, m.quantity)}</td>
-                          <td className='p-1 text-center border-t border-gray-300 text-sm'>{m.comment}</td>
+                          <td className='p-1 py-3 text-center border-t border-gray-300 text-sm'>{convertirFecha(m.date)}</td>
+                          <td className='p-1 py-3 text-center border-t border-gray-300 text-sm'>{nombreProducto(m.product_id)}</td>
+                          <td className='p-1 py-3 text-center border-t border-gray-300 text-sm'>{m.quantity}</td>
+                          <td className='p-1 py-3 text-center border-t border-gray-300 text-sm'>{precioTotal(m.product_id, m.quantity)}</td>
+                          <td className='p-1 py-3 text-center border-t border-gray-300 text-sm'>{m.comment}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -203,6 +213,7 @@ const page = () => {
           </div>
         </div>
       </main>
+      <Crear closeModal={closeModalCrear} openModal={isOpenModalCrear} />
       <ModalEliminar className="transition-opacity opacity-40 duration-500 ease-in-out transform" isOpen={isOpenModalEliminar} onClose={closeModalEliminar} onConfirm={() => eliminarProveedor(proveedorAEliminar)} />
         <Footer/>
     </div>

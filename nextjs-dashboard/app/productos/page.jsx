@@ -237,7 +237,7 @@ const page = () => {
     <div >
       <header className={`text-xl pb-6 text-end transition-all duration-500 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>Gestión de Productos</header>
       
-      <main className={`flex-1 ml-64 mb-14 transition-all h-screen duration-500 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+      <main className={`flex-1 ml-64 mb-14 transition-all flex flex-col min-h-screen duration-500 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
       {productos && productos.length ? (
           productos.map((p) => (
             p.quantity <= 10 && !alertasCerradas.includes(p._id) ? (

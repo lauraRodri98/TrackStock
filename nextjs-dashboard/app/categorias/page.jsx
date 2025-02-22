@@ -10,28 +10,29 @@ import ModalEdit from './ModalEdit';
 const page = () => {
   const { category, setCategory } = useArrayCategorias();
   const [error, setError] = useState('');
-  const [datosSubcategorias, setDatosSubcategorias] = useState([]);
-  const [subCategoriasFiltradas, setSubCategoriasFiltradas] = useState([]);
+  const [datosProductos, setDatosProductos] = useState([]);
+  const [productostFiltradas, setProductostFiltradas] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [visible, setVisible] = useState(false);
-  // const [point, setPoint] = useState({x:0, y:0})
   const [isModalEdit, setIsModalEdit] = useState(false)
   const [idCatSelecc, SetIdCatSelecc] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `${api}subcategorias`;
-        const subcategoryFetch = await fetch(url, { method: 'GET' });
-        const subcategoryData = await subcategoryFetch.json();
+        const url = `${api}product`;
+        const productFetch = await fetch(url, { method: 'GET' });
+        const productData = await productFetch.json();
 
-        if (subcategoryData.status === 'success') {
-          setDatosSubcategorias(subcategoryData.subcategory);
+        if (productData.status === 'success') {
+          setDatosProductos(productData.productos);
+          console.log("Productos: "+productData.productos)
+          console.log(datosProductos)
         }
       } catch (err) {
         setError('No se ha conectado a la API');
         console.error(err);
-        setDatosSubcategorias([]);
+        setDatosProductos([]);
       }
     };
     setVisible(true);
@@ -64,14 +65,14 @@ const page = () => {
   const closeModalEdit = () => setIsModalEdit(false)
 
   const filtrarPorCategorias = (idCat) => {
-    const datos = datosSubcategorias.filter((subCat) => idCat === subCat.categoryId);
-    setSubCategoriasFiltradas(datos);
+    const productos = datosProductos.filter((p)=> p.category === idCat)
+    setProductostFiltradas(productos);
+    window.location.href = `/productos`;
   };
 
   const abrirEdit = (datos) => {
     SetIdCatSelecc(datos)
     setIsModalEdit(true)
-
   };
 
   return (
@@ -106,15 +107,15 @@ const page = () => {
                   ];
                   return (
                     <ContextMenuTrigger id={`contextmenu-${cat._id}`} key={`trigger-${cat._id}`}>
-                    <button
-                      type="button"
-                      onClick={() => filtrarPorCategorias(cat._id)}
-                      className={`${colores[index % colores.length]} rounded shadow-lg w-36 h-32 text-lg flex flex-col justify-center items-center gap-2`}
-                    >
-                      <img src={`/${cat.imagen}`} className="size-16" alt={cat.name} />
-                      {cat.name}
-                    </button>
-                  </ContextMenuTrigger>
+                      <button
+                        type="button"
+                        onClick={() => filtrarPorCategorias(cat._id)}
+                        className={`${colores[index % colores.length]} rounded shadow-lg w-36 h-32 text-lg flex flex-col justify-center items-center gap-2`}
+                      >
+                        <img src={`/${cat.imagen}`} className="size-16" alt={cat.name} />
+                        {cat.name}
+                      </button>
+                    </ContextMenuTrigger>
                   );
                 })}
             </form>
@@ -139,9 +140,9 @@ const page = () => {
               </MenuItem>
             </ContextMenu>
           ))}
-          {subCategoriasFiltradas.length > 0 && (
+          {/* {productostFiltradas.length > 0 && (
             <div className="bg-white p-5 rounded-lg shadow-lg w-96 h-full text-center flex flex-col gap-3">
-              {subCategoriasFiltradas.map((cat) => (
+              {productostFiltradas.map((cat) => (
                 <div
                   key={cat._id}
                   className="flex rounded-lg shadow-lg w-full bg-sky-100 p-2"
@@ -150,7 +151,7 @@ const page = () => {
                 </div>
               ))}
             </div>
-          )}
+          )} */}
         </section>
       </main>
       <Footer />

@@ -24,23 +24,47 @@ const supplier = async(req, res) => {
     }
 }
 
-const create = async(req, res) => {
+const create = async (req, res) => {
     try {
-        const {newSupplier} = req.body;
-        console.log(newSupplier)
+        const { name, email, phone, address } = req.body;
+        console.log(`${name}, ${email}, ${phone}, ${address}`)
 
+        if (!name || !email || !phone || !address) {
+            return res.status(400).json({ message: "Todos los campos son obligatorios" });
+        }
+
+        const existingSupplier = await Suplier.findOne({ email });
+        if (existingSupplier) {
+            return res.status(400).json({ message: "El proveedor con este email ya existe" });
+        }
+
+        const newSupplier = new Suplier({ name, email, phone, address });
+        await newSupplier.save();
+
+        res.status(201).json({ message: "Proveedor creado con éxito", supplier: newSupplier });
     } catch (error) {
-        
+        console.error(error);
+        res.status(500).json({ message: "Error al crear el proveedor" });
+    }
+};
+
+const updateSupplier = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updates = req.body;
+
+        const updatedSupplier = await Suplier.findByIdAndUpdate(id, updates, { new: true });
+
+        if (!updatedSupplier) {
+            return res.status(404).json({ message: "Proveedor no encontrado" });
+        }
+
+        res.status(200).json({ message: "Proveedor actualizado con éxito", supplier: updatedSupplier });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al actualizar el proveedor" });
     }
 }
-
-const updateSupplier = async(req,res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-} 
 
 const deleteSupplier = async(req, res) => {
     console.log("Ha entrado dentro ")

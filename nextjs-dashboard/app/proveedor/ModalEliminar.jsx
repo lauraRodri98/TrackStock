@@ -5,7 +5,7 @@ const ModalEliminar = ({ isOpen, onClose, onConfirm }) => {
   if (!isOpen) return null;
 
   return (
-<div className="transition-all duration-500 ease-in-out transform fixed h-screen w-screen inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
+    <div className="transition-all duration-500 ease-in-out transform fixed h-screen w-screen inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-md">
         <h2>¿Seguro que deseas eliminar este producto?</h2>
         <div className="modal-actions flex items-center justify-around mt-3">

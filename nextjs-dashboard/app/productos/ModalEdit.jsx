@@ -73,11 +73,6 @@ const Modal = ({ isOpen, onClose, children, categorias, selectedProduct}) => {
       alert("Hubo un error en la solicitud.");
     }
   };
-  
-
-//   const filtrarSubCar = (id_categoria) => {
-//     setSelectSubcategoria(subcategory.filter((c) => c.categoryId === id_categoria))
-//   }
 
   const handleCategoriaChange = (e) => {
     const { value } = e.target;
