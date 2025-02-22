@@ -1,38 +1,33 @@
-# Proyecto de Gestión de Inventario
+# Inventory Management Project
 
-Este proyecto es una **aplicación de gestión de inventario** diseñada para organizar productos de manera eficiente. Está creada con el objetivo de ofrecer una solución simple y funcional para gestionar artículos, categorías y estadísticas relacionadas con el inventario.
+This project is an **inventory management application** designed to efficiently organize products. It aims to provide a simple and functional solution for managing items, categories, and inventory-related statistics.
 
-## Características principales:
-- **Gestión de productos**: Permite añadir, editar y eliminar productos del inventario.
-- **Categorías**: Los productos pueden ser organizados por categorías, lo que facilita la búsqueda y organización.
-- **Estadísticas**: Incluye un panel de estadísticas para visualizar la cantidad de productos, productos más vendidos, y alertas para productos con bajo stock.
-- **Interfaz limpia y fácil de usar**: El diseño es minimalista, centrado en la usabilidad y eficiencia del usuario.
-- **Responsive**: Optimizada para funcionar correctamente en diferentes dispositivos (escritorio, tablet y móvil).
+## Main Features:
+- **Product Management**: Allows adding, editing, and deleting products from the inventory.
+- **Categories**: Products can be organized by categories for easier search and organization.
+- **Statistics**: Includes a statistics panel to visualize product quantities, best-selling products, and low-stock alerts.
+- **Clean and User-Friendly Interface**: The design is minimalist, focusing on usability and efficiency.
+- **Responsive**: Optimized to work seamlessly across different devices (desktop, tablet, and mobile).
 
-## Tecnologías utilizadas:
-- **Frontend**: React.js y NextJS para la construcción de la interfaz de usuario.
-- **Backend**: Node.js y Express para la gestión de datos.
-- **Base de datos**: MongoDB para almacenar productos y categorías.
-- **Estilos**: tailwind para la personalización de estilos.
+## Technologies Used:
+- **Frontend**: React.js and Next.js for building the user interface.
+- **Backend**: Node.js and Express for data management.
+- **Database**: MongoDB for storing products and categories.
+- **Styling**: Tailwind CSS for custom styles.
 
-## Instalación:
-1. Clona el repositorio:
+## Installation:
+1. Clone the repository:
    ```bash
    git clone https://github.com/lauraRodri98/gestion-inventario.git
    
-2. Instala las dependencias:
+2. Install dependencies:
    ```bash
    pnpm install
 
-3. Inicia el servidor:
+3. Start the server:
    ```bash
    pnpm run dev
 
-## Tecnologías utilizadas:
-- **Frontend**: React.js para la construcción de la interfaz de usuario.
-- **Backend**: Node.js y Express para la gestión de datos.
-- **Base de datos**: MongoDB para almacenar productos y categorías.
-- **Estilos**: SASS para la personalización de estilos y mejorar la organización del código CSS.
 
-##  Licencia:
-Este proyecto está bajo la Licencia MIT.
+##  License:
+This project is licensed under the MIT License.
