@@ -49,13 +49,6 @@ export default function RootLayout({
               </a>
             </li>
 
-            <li className="mb-4">
-              <a href="/configuracion" className="group relative hover:text-white p-2 rounded flex items-center tracking-wider">
-              <FontAwesomeIcon icon={faGear} className="mr-3 size-5"/>
-                CONFIGURACIÓN
-                <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            </li>
           </ul>
         </div>
 
